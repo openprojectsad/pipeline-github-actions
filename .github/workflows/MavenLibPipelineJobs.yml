@@ -29,5 +29,9 @@ jobs:
         run: mvn --batch-mode --update-snapshots verify --file ${{ inputs.pathPom }}
       - name: Create Maven Package
         run: mvn package --file ${{ inputs.pathPom }}
+      - name: Moving target into root path 
+        run: mv --force --verbose ${{ inputs.pathPom }}/target ./
+      - name: See path where we are 
+        run: pwd && ls -l
       - name: Deploy java
         run: java -jar target/java-project-1.0-SNAPSHOT.jar Diego
